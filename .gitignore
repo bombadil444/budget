@@ -1,3 +1,4 @@
-spending/*
+data/*
 __pycache__/
 categories.py
+creds.json
