@@ -1,7 +1,9 @@
+import os
 import pandas as pd
 from categories import category_groups
 from utils import get_date_str
-from utils import client, spreadsheet_id, sheet_name, ensure_root_cwd
+from utils import ensure_root_cwd, init_google_sheet
+from dotenv import load_dotenv
 import sys
 
 
@@ -49,6 +51,7 @@ def display_results(category_totals, grand_total, not_found):
 
 if __name__ == "__main__":
     ensure_root_cwd()
+    load_dotenv()
 
     # generate data
     data = pd.read_csv(f"data\\{get_date_str()}.csv", usecols=["Particulars", "Debits"])
@@ -59,9 +62,13 @@ if __name__ == "__main__":
 
     # if argument provided, update spreadsheet
     if len(sys.argv) > 1:
+        client = init_google_sheet()
+
         # first arg is the cell in the spreadsheet to write to
         cell_to_insert = sys.argv[1]
 
-        sheet = client.open_by_key(spreadsheet_id).worksheet(sheet_name)
+        sheet = client.open_by_key(os.getenv("SPREADSHEET_ID")).worksheet(
+            os.getenv("SHEET_NAME")
+        )
         sheet_data = list(zip(list(category_totals.values())))
-        sheet.update(cell_to_insert, sheet_data)
+        sheet.update(range_name=cell_to_insert, values=sheet_data)

@@ -24,9 +24,8 @@ if __name__ == "__main__":
         pdf_path,
         pages=f"2-{num_pages}",
         multiple_tables=False,
-        pandas_options={'on_bad_lines': 'warn'}
-    )
-    df = df[0]
+        pandas_options={"on_bad_lines": "warn"},
+    )[0]
 
     # remove first 3 columns that we don't need
     df = df.iloc[:, 3:]
