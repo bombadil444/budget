@@ -20,7 +20,12 @@ if __name__ == "__main__":
     # convert PDF
     pdf_path = f"data\\{get_date_str()}_statement.pdf"
     num_pages = count_pdf_pages(pdf_path)
-    df = tabula.read_pdf(pdf_path, pages=f"2-{num_pages}", multiple_tables=False)
+    df = tabula.read_pdf(
+        pdf_path,
+        pages=f"2-{num_pages}",
+        multiple_tables=False,
+        pandas_options={'on_bad_lines': 'warn'}
+    )
     df = df[0]
 
     # remove first 3 columns that we don't need
