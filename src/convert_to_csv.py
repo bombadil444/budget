@@ -18,8 +18,9 @@ if __name__ == "__main__":
     ensure_root_cwd()
 
     # convert PDF
-    pdf_path = f"data\\{get_date_str()}_statement.pdf"
+    pdf_path = f"data/{get_date_str()}_statement.pdf"
     num_pages = count_pdf_pages(pdf_path)
+
     df = tabula.read_pdf(
         pdf_path,
         pages=f"2-{num_pages}",
@@ -39,4 +40,4 @@ if __name__ == "__main__":
     df.drop(df[df["Debits"].str.contains("CR")].index, inplace=True)
 
     # save as csv
-    df.to_csv(f"data\\{get_date_str()}.csv", index=False)
+    df.to_csv(f"data/{get_date_str()}.csv", index=False)

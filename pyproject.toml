@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "budget"
+version = "0.1.0"
+description = ""
+authors = ["Bombadil <mastwyk42@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pdfminer-six = "^20231228"
+google-auth = "^2.31.0"
+gspread = "^6.1.2"
+tabula-py = {extras = ["jpype"], version = "^2.9.3"}
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

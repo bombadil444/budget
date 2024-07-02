@@ -54,7 +54,7 @@ if __name__ == "__main__":
     load_dotenv()
 
     # generate data
-    data = pd.read_csv(f"data\\{get_date_str()}.csv", usecols=["Particulars", "Debits"])
+    data = pd.read_csv(f"data/{get_date_str()}.csv", usecols=["Particulars", "Debits"])
     category_totals, grand_total, not_found = sum_totals(data)
 
     # print data
